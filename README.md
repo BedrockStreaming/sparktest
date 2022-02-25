@@ -129,6 +129,8 @@ There is only 2 things we care about :
   * testing
   * coding standards
 
+### Version
+
 We use [SemVer](http://semver.org/) for versioning (version number MAJOR.MINOR.PATCH).
   * MAJOR: incompatible changes needing data catch-up
   * MINOR: every changes other than bugfixes
