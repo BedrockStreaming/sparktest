@@ -1,0 +1,43 @@
+name: Check Scala
+
+on:
+  pull_request:
+    paths:
+      - 'src/main/scala/**'
+      - 'src/test/scala/**'
+    branches: 
+      - main
+  push:
+    paths:
+      - 'src/main/scala/**'
+      - 'src/test/scala/**'
+    branches:
+      - main
+
+jobs:
+  check:
+    runs-on: 
+      - ubuntu-latest
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v2
+
+      - name: Setup cache
+        uses: coursier/cache-action@v6
+
+      - name: Setup coursier
+        uses: coursier/setup-action@v1
+        with:
+          jvm: adopt:8
+          apps: sbt
+
+      - name: Scalafmt Check
+        run: sbt ";scalafmtCheckAll;scalafmtSbtCheck"
+
+      - name: Validate Compilation
+        run: sbt compile
+
+      - name: Run Tests
+        run: sbt test
+
