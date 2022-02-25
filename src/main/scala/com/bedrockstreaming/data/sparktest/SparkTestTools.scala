@@ -24,8 +24,8 @@ object SparkTestTools {
         .asJava
 
     private def toStructType(structFields: Seq[(String, DataType)]): StructType =
-      StructType(structFields.map {
-        case (name, structType) => StructField(name, structType)
+      StructType(structFields.map { case (name, structType) =>
+        StructField(name, structType)
       })
   }
 }

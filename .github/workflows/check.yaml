@@ -5,12 +5,16 @@ on:
     paths:
       - 'src/main/scala/**'
       - 'src/test/scala/**'
+      - 'build.sbt'
+      - 'project/plugins.sbt'
     branches: 
       - main
   push:
     paths:
       - 'src/main/scala/**'
       - 'src/test/scala/**'
+      - 'build.sbt'
+      - 'project/plugins.sbt'
     branches:
       - main
 

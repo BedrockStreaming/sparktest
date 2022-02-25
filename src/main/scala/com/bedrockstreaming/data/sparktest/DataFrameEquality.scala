@@ -43,12 +43,11 @@ object DataFrameEquality {
 
   private[sparktest] def castMapsAsArrays(df: DataFrame): DataFrame =
     df.schema
-      .foldLeft(df)(
-        (castedDf: DataFrame, structField: StructField) =>
-          structField.dataType match {
-            case _: MapType =>
-              castedDf.withColumn(structField.name, mapToArrayUdf(col(structField.name)))
-            case _ => castedDf
-          }
+      .foldLeft(df)((castedDf: DataFrame, structField: StructField) =>
+        structField.dataType match {
+          case _: MapType =>
+            castedDf.withColumn(structField.name, mapToArrayUdf(col(structField.name)))
+          case _ => castedDf
+        }
       )
 }

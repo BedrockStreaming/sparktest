@@ -8,6 +8,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
 class DataFrameEqualitySpec extends AnyFlatSpec with Matchers with SparkTestSupport with CustomPrettifier {
+
   "DataFrameEquality" should "return true when the dataframes are equals" in {
     val df = spark.createDF(Seq(("Bedrock", "Lyon")), Seq(("company", StringType), ("city", StringType)))
 
