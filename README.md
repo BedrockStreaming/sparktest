@@ -58,18 +58,68 @@ To use **SparkTest** in an existing maven or sbt project:
 > WIP
 
 ## Tools
-### DataFrameEquality
-This `trait` allows you to compare two DataFrames ignoring the nullability of the fields in the schema (as Spark may be inconsistent with it).
-To use it, simply extends `DataFrameEquality` in your testing class.
-In order to have a better expected output when the test is false, `DataFrameEquality` extends `CustomPrettifier` which provides a custom error message. The main advantage is when you're testing whithin IntelliJ IDEA:
-
-![](doc/IntelliJOutput.gif)
-
 ### SparkTestSupport
 This small `trait` provides a simple SparkSession with log set to warnings and let you focus only on your tests and not on the technical needs to create them.
 
+Example:
+```scala
+import com.bedrockstreaming.data.sparktest.SparkTestSupport
+
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
+
+class MainSpec 
+  extends AnyFlatSpec
+  with Matchers
+  with SparkTestSupport {
+
+  "main" should "do stuff" in {
+    # A SparkSession `spark` is built in trait `SparkTestSupport`
+    import spark.implicits._
+    
+    // ...
+  }
+}
+```
+
+### DataFrameEquality
+This `trait` allows you to compare two DataFrames ignoring the nullability of the fields in the schema (as Spark may be inconsistent with it).
+To use it, simply extends `DataFrameEquality` in your testing class.
+
+Example:
+```scala
+import com.bedrockstreaming.data.sparktest.{ DataFrameEquality, SparkTestSupport }
+
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
+
+class MainSpec 
+  extends AnyFlatSpec
+  with Matchers
+  with DataFrameEquality
+  with SparkTestSupport {
+
+  "main" should "do stuff" in {
+    # A SparkSession `spark` is built in trait `SparkTestSupport`
+    import spark.implicits._
+    
+    val df1 = Seq(("id1", 42)).toDF("id", "age")
+    val df2 = Seq((42, "id1")).toDF("age", "id")
+
+    df1 shouldEqual df2
+  }
+}
+```
+
+In order to have a better expected output when the test is false, `DataFrameEquality` extends `CustomPrettifier` which provides a custom error message. 
+The main advantage is when you're testing whithin IntelliJ IDEA:
+
+![](doc/IntelliJOutput.gif)
+
 ### SparkTestTools
-This `object` gives you an extension method thanks to an `implicit class` to create DataFrame from a simple `Seq` of data, no matter what value you want (as, for now, Spark is not working very well when creating null, for example). Therefore, you can do as followed:
+This `object` gives you an extension method thanks to an `implicit class` to create DataFrame from a simple `Seq` of data, 
+no matter what value you want (as, for now, Spark is not working very well when creating null, for example). 
+Therefore, you can do as followed:
 ```scala
 import com.bedrock.data.abtest.common.tool.test.SparkTestTools.SparkSessionOps
 
@@ -90,7 +140,7 @@ val myDF: DataFrame = spark.createDF(
 
 ## Known Issues 
 
-* **Nested Maps**: The quality between DataFrames with nested _maps_ will throw an error due to the impossibility to cast them as array. (Error: `The value (Map(...)) of the type (scala.collection.immutable.Map.Map1) cannot be converted to the string type`)
+* **Nested Maps**: The equality between DataFrames with nested _maps_ will throw an error due to the impossibility to cast them as array. (Error: `The value (Map(...)) of the type (scala.collection.immutable.Map.Map1) cannot be converted to the string type`)
 
 ## Contribution
 This library was originally created for Bedrock Streaming projects purpose. As we strongly believe in open source, we share it to you.
