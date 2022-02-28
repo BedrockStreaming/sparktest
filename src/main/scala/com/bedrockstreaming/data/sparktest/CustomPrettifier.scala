@@ -36,7 +36,7 @@ object CustomerPrettifier {
     val orderedDF = byColNameDF.orderBy(byColNameDF.columns.map(col): _*)
     val stringData = showString(orderedDF)
 
-    Seq(schemaTitle, stringSchema, dataTitle, stringData).mkString("\n", "\n", "\n")
+    Seq(schemaTitle, stringSchema, dataTitle, stringData).mkString("\r\n", "\r\n", "\r\n")
   }
 
   private def showString(

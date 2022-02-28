@@ -138,10 +138,6 @@ val myDF: DataFrame = spark.createDF(
     )
 ```
 
-## Known Issues 
-
-* **Nested Maps**: The equality between DataFrames with nested _maps_ will throw an error due to the impossibility to cast them as array. (Error: `The value (Map(...)) of the type (scala.collection.immutable.Map.Map1) cannot be converted to the string type`)
-
 ## Contribution
 This library was originally created for Bedrock Streaming projects purpose. As we strongly believe in open source, we share it to you.
 

@@ -6,7 +6,7 @@ ThisBuild / scalaVersion := "2.12.11"
 // Versions
 // ********
 
-val SparkVersion = "3.0.3"
+val SparkVersion = "3.2.1"
 
 // ************
 // Dependencies
