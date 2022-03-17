@@ -143,6 +143,28 @@ This library was originally created for Bedrock Streaming projects purpose. As w
 
 If you want to learn more about our opinion on open source, you can read the [OSS article](http://tech.m6web.fr/oss/) on our website.
 
+### Deployment 
+Currently the deployment is manually handled by maintainers. 
+We use [Sonatype](https://central.sonatype.org/publish/publish-guide/#deployment) to publish and host artifacts along
+with the plugin [sbt-sonatype](https://github.com/xerial/sbt-sonatype).
+
+To become an authorized member:
+* Create a Sonatype account: https://issues.sonatype.org/secure/Signup!default.jspa
+* Ask a maintainer to add your username in authorized member of the application
+* Create a file `$HOME/.sbt/sonatype_credentials` with content:
+```
+realm=Sonatype Nexus Repository Manager
+host=s01.oss.sonatype.org
+user=<username>
+password=<password>
+```
+* Create a file `$HOME/.sbt/1.0/sonatype.sbt`
+
+```scala
+credentials += Credentials(Path.userHome / ".sbt" / "sonatype_credentials")
+```
+* Finall run the command `sbt sonatypeBundleRelease` to publish a new release
+
 ### Developing
 
 The features available for now are only those we need, but you're welcome to open an issue or pull-request if you need more.

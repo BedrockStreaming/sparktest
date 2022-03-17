@@ -1,4 +1,4 @@
-ThisBuild / organization := "com.bedrocksreaming.data"
+ThisBuild / organization := "com.bedrocksreaming"
 ThisBuild / version := "0.1.0"
 ThisBuild / scalaVersion := "2.12.11"
 
@@ -18,3 +18,5 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-core" % SparkVersion,
   "org.apache.spark" %% "spark-sql" % SparkVersion
 )
+
+publishTo := sonatypePublishToBundle.value
