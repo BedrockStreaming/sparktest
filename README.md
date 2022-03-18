@@ -53,35 +53,17 @@ To use **SparkTest** in an existing maven or sbt project:
 
 > WIP
 ```xml
-<repositories>
-  ...
-  <repository>
-    <id>sonatype</id>
-    <name>Sonatype Repository</name>
-    <url>https://s01.oss.sonatype.org/content/repositories/releases/</url>
-  </repository>
-  ...
-</repositories>
-
-<dependencies>
-  ...
-  <dependency>
-    <groupId>com.bedrockstreaming</groupId>
-    <artifactId>sparktest_2.12</artifactId>
-    <version>0.1.0</version>
-    <scope>test</scope>
-  </dependency>
-  ...
-</dependencies>
+<dependency>
+  <groupId>com.bedrockstreaming</groupId>
+  <artifactId>sparktest_2.12</artifactId>
+  <version>0.1.0</version>
+  <scope>test</scope>
+</dependency>
 ```
 
 ### SBT
 
 ```scala
-resolvers += "sonatype".at(
-  "https://s01.oss.sonatype.org/content/repositories/releases"
-)
-
 libraryDependencies += "com.bedrockstreaming" % "sparktest_2.12" % "0.1.0" % "test"
 ```
 
