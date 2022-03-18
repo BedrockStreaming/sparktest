@@ -1,4 +1,4 @@
-# SparkTest
+# SparkTest - 0.1.0
 
 **SparkTest** is a Scala library for unit testing with [Spark](https://github.com/apache/spark). 
 For now, it is only made for DataFrames. 
@@ -52,10 +52,20 @@ To use **SparkTest** in an existing maven or sbt project:
 ### Maven
 
 > WIP
+```xml
+<dependency>
+  <groupId>com.bedrockstreaming</groupId>
+  <artifactId>sparktest_2.12</artifactId>
+  <version>0.1.0</version>
+  <scope>test</scope>
+</dependency>
+```
 
 ### SBT
 
-> WIP
+```scala
+libraryDependencies += "com.bedrockstreaming" % "sparktest_2.12" % "0.1.0" % "test"
+```
 
 ## Tools
 ### SparkTestSupport
@@ -181,3 +191,34 @@ We use [SemVer](http://semver.org/) for versioning (version number MAJOR.MINOR.P
   * MAJOR: incompatible changes needing data catch-up
   * MINOR: every changes other than bugfixes
   * PATCH: bugfix
+
+### Deployment 
+Currently the deployment is manually handled by maintainers. 
+We use [Sonatype](https://central.sonatype.org/publish/publish-guide/#deployment) to publish and host artifacts along
+with the plugin [sbt-sonatype](https://github.com/xerial/sbt-sonatype).
+
+To become an authorized member:
+* Create a Sonatype account: https://issues.sonatype.org/secure/Signup!default.jspa
+* Ask a maintainer to [add your username](https://central.sonatype.org/publish/manage-permissions/) in authorized member of the application
+* Create a file `$HOME/.sbt/1.0/plugins/gpg.sbt` with content `addSbtPlugin("com.github.sbt" % "sbt-pgp" % "2.1.2")`
+`
+* Create a file `$HOME/.sbt/sonatype_credentials` with content:
+```sonatypeBundleRelease
+realm=Sonatype Nexus Repository Manager
+host=s01.oss.sonatype.org
+user=<username>
+password=<password>
+```
+* Create a file `$HOME/.sbt/1.0/sonatype.sbt`
+
+```scala
+credentials += Credentials(Path.userHome / ".sbt" / "sonatype_credentials")
+```
+* Finally run the command `sbt publishSigned` to publish a new release or snapshot
+
+### Contributors
+
+* [Thomas Bony](https://github.com/tbony)
+* [Felix Marsault](https://github.com/fmarsault)
+* [Quentin Nambot](https://github.com/rinzool)
+* Team Proton with :heart:
