@@ -218,6 +218,6 @@ credentials += Credentials(Path.userHome / ".sbt" / "sonatype_credentials")
 
 ### Contributors
 
-* [Thomas Bony](https://github.com/thomasbony)
+* [Thomas Bony](https://github.com/tbony)
 * [Felix Marsault](https://github.com/fmarsault)
 * [Quentin Nambot](https://github.com/rinzool)

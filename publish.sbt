@@ -6,7 +6,7 @@ ThisBuild / scmInfo := Some(
 )
 
 ThisBuild / developers := List(
-  Developer(id = "thomasbony", name = "Thomas BONY", email = "???", url = url("https://github.com/thomasbony")),
+  Developer(id = "tbony", name = "Thomas BONY", email = "t.bony92@gmail.com", url = url("https://github.com/tbony")),
   Developer(
     id = "fmarsault",
     name = "Félix MARSAULT",
