@@ -1,4 +1,4 @@
-# SparkTest
+# SparkTest - 0.1.0
 
 **SparkTest** is a Scala library for unit testing with [Spark](https://github.com/apache/spark). 
 For now, it is only made for DataFrames. 
@@ -52,10 +52,38 @@ To use **SparkTest** in an existing maven or sbt project:
 ### Maven
 
 > WIP
+```xml
+<repositories>
+  ...
+  <repository>
+    <id>sonatype</id>
+    <name>Sonatype Repository</name>
+    <url>https://s01.oss.sonatype.org/content/repositories/releases/</url>
+  </repository>
+  ...
+</repositories>
+
+<dependencies>
+  ...
+  <dependency>
+    <groupId>com.bedrockstreaming</groupId>
+    <artifactId>sparktest_2.12</artifactId>
+    <version>0.1.0</version>
+    <scope>test</scope>
+  </dependency>
+  ...
+</dependencies>
+```
 
 ### SBT
 
-> WIP
+```scala
+resolvers += "sonatype".at(
+  "https://s01.oss.sonatype.org/content/repositories/releases"
+)
+
+libraryDependencies += "com.bedrockstreaming" % "sparktest_2.12" % "0.1.0" % "test"
+```
 
 ## Tools
 ### SparkTestSupport
@@ -151,8 +179,10 @@ with the plugin [sbt-sonatype](https://github.com/xerial/sbt-sonatype).
 To become an authorized member:
 * Create a Sonatype account: https://issues.sonatype.org/secure/Signup!default.jspa
 * Ask a maintainer to add your username in authorized member of the application
+* Create a file `$HOME/.sbt/1.0/plugins/gpg.sbt` with content `addSbtPlugin("com.github.sbt" % "sbt-pgp" % "2.1.2")`
+`
 * Create a file `$HOME/.sbt/sonatype_credentials` with content:
-```
+```sonatypeBundleRelease
 realm=Sonatype Nexus Repository Manager
 host=s01.oss.sonatype.org
 user=<username>
@@ -163,7 +193,7 @@ password=<password>
 ```scala
 credentials += Credentials(Path.userHome / ".sbt" / "sonatype_credentials")
 ```
-* Finall run the command `sbt sonatypeBundleRelease` to publish a new release
+* Finally run the command `sbt publishSigned` to publish a new release or snapshot
 
 ### Developing
 
@@ -203,3 +233,9 @@ We use [SemVer](http://semver.org/) for versioning (version number MAJOR.MINOR.P
   * MAJOR: incompatible changes needing data catch-up
   * MINOR: every changes other than bugfixes
   * PATCH: bugfix
+
+### Contributors
+
+* [Thomas Bony](https://github.com/thomasbony)
+* [Felix Marsault](https://github.com/fmarsault)
+* [Quentin Nambot](https://github.com/rinzool)
