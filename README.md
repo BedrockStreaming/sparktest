@@ -1,4 +1,4 @@
-# SparkTest - 0.1.0
+# SparkTest - 0.2.0
 
 **SparkTest** is a Scala library for unit testing with [Spark](https://github.com/apache/spark). 
 For now, it is only made for DataFrames. 
@@ -56,7 +56,7 @@ To use **SparkTest** in an existing maven or sbt project:
 <dependency>
   <groupId>com.bedrockstreaming</groupId>
   <artifactId>sparktest_2.12</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
   <scope>test</scope>
 </dependency>
 ```
@@ -64,12 +64,13 @@ To use **SparkTest** in an existing maven or sbt project:
 ### SBT
 
 ```scala
-libraryDependencies += "com.bedrockstreaming" % "sparktest_2.12" % "0.1.0" % "test"
+libraryDependencies += "com.bedrockstreaming" % "sparktest_2.12" % "0.2.0" % "test"
 ```
 
 ## Tools
 ### SparkTestSupport
 This small `trait` provides a simple SparkSession with log set to warnings and let you focus only on your tests and not on the technical needs to create them.
+If your SparkSession need additional configuration, you can pass it through the val `additionalSparkConfiguration`.
 
 Example:
 ```scala
@@ -83,8 +84,12 @@ class MainSpec
   with Matchers
   with SparkTestSupport {
 
+  override lazy val additionalSparkConfiguration: Map[String, String] =
+    Map("spark.sql.extensions" -> "io.delta.sql.DeltaSparkSessionExtension",
+      "spark.sql.catalog.spark_catalog" -> "org.apache.spark.sql.delta.catalog.DeltaCatalog")
+
   "main" should "do stuff" in {
-    # A SparkSession `spark` is built in trait `SparkTestSupport`
+    // A SparkSession `spark` is built in trait `SparkTestSupport`
     import spark.implicits._
     
     // ...
@@ -110,7 +115,7 @@ class MainSpec
   with SparkTestSupport {
 
   "main" should "do stuff" in {
-    # A SparkSession `spark` is built in trait `SparkTestSupport`
+    // A SparkSession `spark` is built in trait `SparkTestSupport`
     import spark.implicits._
     
     val df1 = Seq(("id1", 42)).toDF("id", "age")
