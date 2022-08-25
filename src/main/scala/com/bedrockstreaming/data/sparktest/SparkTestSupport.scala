@@ -16,7 +16,7 @@ trait SparkTestSupport {
     .appName(appName)
     .config("spark.sql.shuffle.partitions", shufflePartitions.toString)
 
-  additionalSparkConfiguration.foreach {case (k, v) => sparkBuilder.config(k, v)}
+  additionalSparkConfiguration.foreach { case (k, v) => sparkBuilder.config(k, v) }
 
   implicit val spark: SparkSession = sparkBuilder.getOrCreate()
 
