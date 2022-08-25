@@ -219,6 +219,7 @@ password=<password>
 ```scala
 credentials += Credentials(Path.userHome / ".sbt" / "sonatype_credentials")
 ```
+  * (If necessary): Create a [GPG key pair](https://central.sonatype.org/publish/requirements/gpg/)
 * Finally run the command `sbt publishSigned` to publish a new release or snapshot
 
 ### Contributors
