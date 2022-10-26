@@ -5,7 +5,7 @@ import org.apache.spark.sql.functions.col
 import org.scalactic.Prettifier
 import java.lang.reflect.Method
 
-import CustomerPrettifier.prettyDataFrame
+import CustomPrettifier.prettyDataFrame
 
 trait CustomPrettifier {
 
@@ -15,7 +15,7 @@ trait CustomPrettifier {
   }
 }
 
-object CustomerPrettifier {
+object CustomPrettifier {
 
   private[sparktest] def prettyDataFrame(df: DataFrame): String = {
     val schemaTitle =
