@@ -1,4 +1,4 @@
-# SparkTest - 0.2.0
+# SparkTest - 0.3.0
 
 **SparkTest** is a Scala library for unit testing with [Spark](https://github.com/apache/spark). 
 For now, it is only made for DataFrames. 

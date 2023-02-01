@@ -1,6 +1,6 @@
 package com.bedrockstreaming.data.sparktest
 
-import com.bedrockstreaming.data.sparktest.CustomerPrettifier.prettyDataFrame
+import com.bedrockstreaming.data.sparktest.CustomPrettifier.prettyDataFrame
 import com.bedrockstreaming.data.sparktest.SparkTestTools.SparkSessionOps
 import org.apache.spark.sql.types.{ IntegerType, LongType, StringType }
 import org.scalatest.flatspec.AnyFlatSpec

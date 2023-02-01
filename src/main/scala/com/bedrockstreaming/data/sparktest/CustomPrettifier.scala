@@ -1,11 +1,9 @@
 package com.bedrockstreaming.data.sparktest
 
-import org.apache.spark.sql.DataFrame
+import com.bedrockstreaming.data.sparktest.CustomPrettifier.prettyDataFrame
 import org.apache.spark.sql.functions.col
+import org.apache.spark.sql.{ DataFrame, SparkShowString }
 import org.scalactic.Prettifier
-import java.lang.reflect.Method
-
-import CustomerPrettifier.prettyDataFrame
 
 trait CustomPrettifier {
 
@@ -15,7 +13,7 @@ trait CustomPrettifier {
   }
 }
 
-object CustomerPrettifier {
+object CustomPrettifier {
 
   private[sparktest] def prettyDataFrame(df: DataFrame): String = {
     val schemaTitle =
@@ -48,13 +46,6 @@ object CustomerPrettifier {
     numRows: Int = Int.MaxValue,
     truncate: Int = 0,
     vertical: Boolean = false
-  ): String = {
-    val methodName = "showString"
-    val method: Method =
-      df.getClass.getDeclaredMethod(methodName, numRows.getClass, truncate.getClass, vertical.getClass)
-    method.setAccessible(true)
-    method
-      .invoke(df, numRows.asInstanceOf[Object], truncate.asInstanceOf[Object], vertical.asInstanceOf[Object])
-      .asInstanceOf[String]
-  }
+  ): String =
+    SparkShowString(df, numRows, truncate, vertical)
 }
